@@ -1,0 +1,20 @@
+html,body{width:100%;height:100%;padding: 0;margin: 0;overflow: hidden;font-family:"Arial";background:#232323;}
+table{table-layout:fixed;width:100%;border: 0px;border-collapse:collapse;counter-reset:0;}
+table tr {counter-increment: rowNumber;}
+table tr td:first-child::before {content: counter(rowNumber);}
+tr:hover td{color:#000;background: #CCC;background-clip: padding-box; border-bottom: 1px solid #444;}
+th{color:#DDD;background-color:#555;text-align:left;padding-left:4px;padding-bottom: 2px;padding-top: 2px;}
+td{font-size: 10px;color:#444;background-color: #FFF;}
+tr{font-family:"Arial";font-weight: lighter;font-size: 10px;color:#444;background-color:#FFF;border-bottom: 1px solid #444;border-right:1px solid #444;}
+td{padding-left:5px;padding-bottom: 2px;padding-top: 2px;}
+.bh{border-right:1px solid #DDD;}
+.bt{border-right:1px solid #444;}
+.left{position:fixed;width:33%;left:0px;padding-left:5px;color: #DDD;background:#222;height:30px;top:10px;font-size:12px;text-align:left;}
+.cent{position:fixed;width: 34%;left:33%;color: #DDD;background:#222;height:30px; top:10px;font-size:12px;text-align:center;}
+.righ{position:fixed;width: 33%;right:0px;padding-right:5px;color: #DDD;background:#222;height:30px; top:10px;font-size:12px;text-align:right;}
+.head{position:fixed;width:100%;left:0;top:30px;height:30px;}
+.temp{position:absolute;left:0;top:60px;right:-13px;bottom:25px;overflow-y: scroll;}
+.bott{position:fixed;z-index:2;width:100%;left:0;height: 25px;bottom:0px;border: none;outline:none;background-color: #222;color:#CFF;text-align: right;}
+input[type="text"]{outline:none;border:0px;color:#FFF;background: transparent;font-size:12px;}
+#cdate{color:#CFF;}
+#ldr{display:none;position:absolute;bottom:5px;left:50%;width:30px;height:10px;border: none;outline:none;background:#232323}

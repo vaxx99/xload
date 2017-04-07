@@ -1,0 +1,18 @@
+{{define "stat"}}
+<!DOCTYPE html>
+<html><head>
+    <title>Calls Toolkit</title>
+    <link rel="stylesheet" type="text/css" href="xcss/stat.css"/>
+    <script type="text/javascript" src="xcss/stat.js"></script>
+    <meta charset="UTF-8">
+    </head>
+    <body>
+    <div class="tab0"><table>
+      <tr><th class="th" colspan="5">{{.DT}}</th></tr>
+      <tr class="rc"><td class="tl">{{.TM}}</td><td class="fs">IAD</td><td class="fs">AMA</td><td class="si">SI2K</td><td class="es">ES11</td></tr>
+      {{range .Fc}}
+      <tr class="rc"><td class="dt">{{.T}}</td><td class="{{.VA}}">{{.A}}</td><td class="{{.VB}}">{{.B}}</td><td class="{{.VC}}">{{.C}}</td><td class="{{.VD}}">{{.D}}</td></tr>{{end}}
+      <tr class="bt"><td class="tl">{{.AL.A}}</td><td>{{.AL.B}}</td><td>{{.AL.C}}</td><td>{{.AL.D}}</td><td>{{.AL.E}}</td></tr>
+    </table></div>
+</body></html>
+{{end}}

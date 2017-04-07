@@ -1,0 +1,79 @@
+{{define "logs"}}
+<!DOCTYPE html>
+<html><head>
+    <title>Calls toolkit</title>
+    <link rel="stylesheet" type="text/css" href="xcss/morf.css"/>
+    <script type="text/javascript" src="xcss/logs.js"></script>
+    <meta charset="UTF-8">
+    </head>
+    <body>
+    <div class="left"><span>Finder query report</span></div>
+    <div class="cent"><span id="cdate"></span></div>
+    <div class="righ"></div>
+    <table class="head">
+      <col width="3%" class="bh">
+      <col width="8%" class="bh">
+      <col width="5%" class="bh">
+      <col width="5%" class="bh">
+      <col width="15%" class="bh">
+      <col width="5%" class="bh">
+      <col width="5%" class="bh">
+      <col width="5%" class="bh">
+      <col width="15%" class="bh">
+      <col width="15%" class="bh">
+      <col width="15%" class="bh">
+      <col width="15%" class="bh">
+      <col width="5%" class="bh">
+      <col width="5%" class="bh">
+      <col width="5%" class="bh">
+      <col width="5%" class="bh">
+      <thead>
+      <tr>
+      <th>#</th>
+      <th>Час</th>
+      <th>К-ть</th>
+      <th>Т-ть</th>
+      <th>Адреса</th>
+      <th>Стан.</th>
+      <th>Стр.</th>
+      <th>Кат.А</th>
+      <th>Номер А</th>
+      <th>Номер Б</th>
+      <th>Дата початку</th>
+      <th>Дата кінця</th>
+      <th>Напр.</th>
+      <th>Вх.Г.</th>
+      <th>Вих.Г.</th>
+      <th>Сек.</th>
+    </tr>
+    </thead>
+  </table>
+<div class="temp">
+  <table>
+    <col width="3%" class="bt">
+    <col width="8%" class="bt">
+    <col width="5%" class="bt">
+    <col width="5%" class="bt">
+    <col width="15%" class="bt">
+    <col width="5%" class="bt">
+    <col width="5%" class="bt">
+    <col width="5%" class="bt">
+    <col width="15%" class="bt">
+    <col width="15%" class="bt">
+    <col width="15%" class="bt">
+    <col width="15%" class="bt">
+    <col width="5%" class="bt">
+    <col width="5%" class="bt">
+    <col width="5%" class="bt">
+    <col width="5%" >
+   <tbody>
+	{{range .}}
+	<tr><td></td><td>{{.A}}</td><td>{{.C}}</td><td>{{.D}}</td><td>{{.B}}</td><td>{{.E.Sw}}</td><td>{{.E.Hi}}</td><td>{{.E.Sc}}</td><td>{{.E.Na}}</td>
+	<td>{{.E.Nb}}</td><td>{{.E.Ds}}</td><td>{{.E.De}}</td><td>{{.E.Dr}}</td>
+	<td>{{.E.It}}</td><td>{{.E.Ot}}</td><td>{{.E.Du}}</td></tr>
+	{{end}}
+</tbody>
+	</table></div>
+	<script type="text/javascript">document.getElementById("cdate").innerHTML = cd(0);</script>
+ </body></html>
+ {{end}}

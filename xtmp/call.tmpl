@@ -1,0 +1,71 @@
+{{define "call"}}
+<!DOCTYPE html>
+<html><head>
+    <title>Calls toolkit</title>
+    <link rel="stylesheet" type="text/css" href="xcss/morf.css"/>
+    <script type="text/javascript" src="xcss/call.js"></script>
+    <meta charset="UTF-8">
+    </head>
+    <body>
+    <form id="f0" action="/call" method="post" autocomplete="off"></form>
+    <div class="left"><span>Кількість: {{.Rcn}}</span></div>
+    <div class="cent"><span id="cdate"></span></div>
+    <div class="righ">Тривалість: {{.Rdr}} сек.</div>
+    <table class="head">
+      <col width="5%" class="bh">
+      <col width="5%" class="bh">
+      <col width="5%" class="bh">
+      <col width="5%" class="bh">
+      <col width="15%" class="bh">
+      <col width="15%" class="bh">
+      <col width="15%" class="bh">
+      <col width="15%" class="bh">
+      <col width="5%" class="bh">
+      <col width="5%" class="bh">
+      <col width="5%" class="bh">
+      <col width="5%" class="bh">
+      <thead>
+      <tr>
+      <th>№</th>
+      <th><input form="f0" id=ws type="text" name="sw" placeholder="Стан." value="{{.Old.Sw}}"/></th>
+      <th><input form="f0" id=ih type="text" name="hi" placeholder="Стр." value="{{.Old.Hi}}"/></th>
+      <th><input form="f0" id=cs type="text" name="sc" placeholder="Кат.А" value="{{.Old.Sc}}"/></th>
+      <th><input form="f0" id=an type="text" name="na" placeholder="Номер А" value="{{.Old.Na}}"/></th>
+      <th><input form="f0" id=bn type="text" name="nb" placeholder="Номер Б" value="{{.Old.Nb}}"/></th>
+      <th><input form="f0" id=sd type="text" name="ds" placeholder="Дата початку" value="{{.Old.Ds}}"/></th>
+      <th><input form="f0" id=ed type="text" name="de" placeholder="Дата кінця" value="{{.Old.De}}"/></th>
+      <th><input form="f0" id=rd type="text" name="dr" placeholder="Напр." value="{{.Old.Dr}}"/></th>
+      <th><input form="f0" id=ti type="text" name="it" placeholder="Вх.ТГ" value="{{.Old.It}}"/></th>
+      <th><input form="f0" id=to type="text" name="ot" placeholder="Вих.ТГ" value="{{.Old.Ot}}"/></th>
+      <th><input form="f0" id=ud type="text" name="du" placeholder="Сек." value="{{.Old.Du}}"/></th>
+    </tr>
+    </thead>
+  </table>
+<div class="temp">
+  <table>
+    <col width="5%" class="bt">
+    <col width="5%" class="bt">
+    <col width="5%" class="bt">
+    <col width="5%" class="bt">
+    <col width="15%" class="bt">
+    <col width="15%" class="bt">
+    <col width="15%" class="bt">
+    <col width="15%" class="bt">
+    <col width="5%" class="bt">
+    <col width="5%" class="bt">
+    <col width="5%" class="bt">
+    <col width="5%" >
+   <tbody>
+	{{range .Rec}}
+	<tr><td></td><td>{{.Sw}}</td><td>{{.Hi}}</td><td>{{.Sc}}</td><td>{{.Na}}</td>
+	<td>{{.Nb}}</td><td>{{.Ds}}</td><td>{{.De}}</td><td>{{.Dr}}</td>
+	<td>{{.It}}</td><td>{{.Ot}}</td><td>{{.Du}}</td></tr>
+	{{end}}
+</tbody>
+	</table></div>
+  <div class="bott">
+    <img id="ldr" src="xcss/load.gif"/>
+  </div>
+	<script type="text/javascript">document.getElementById("cdate").innerHTML = cd(0);</script>
+ </body></html>
+ {{end}}
