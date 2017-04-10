@@ -172,7 +172,6 @@ func Comp(s, w xama.Redrec) bool {
 	var find []int
 	var fc int
 	ss := reflect.ValueOf(&s).Elem()
-	//st := ss.Type()
 	ws := reflect.ValueOf(&w).Elem()
 	wt := ws.Type()
 	for i := 0; i < ws.NumField(); i++ {
@@ -238,14 +237,57 @@ func Find(b string, w xama.Redrec, db *bolt.DB) xama.Block {
 	return rec
 }
 
-func Bucket(w xama.Redrec, db *bolt.DB) (bool, string) {
-	var bn []string
+func Bucket(w xama.Redrec, db *bolt.DB) (bool, []string) {
+	between := false
+	var bc []string
+	var bk []string
+	var rc []string
+	bn := map[string]int{}
+	bd := map[string]int{}
 	cd := time.Now().Format("20060102")
 	db.View(func(tx *bolt.Tx) error {
 		b := tx.Bucket([]byte("size"))
 		if err := b.ForEach(func(k, v []byte) error {
 			if string(k) != cd {
-				bn = append(bn, string(k))
+				bc = append(bc, string(k))
+				bn[string(k)]++
+			}
+			if len(w.Ds) == 6 && string(k)[:6] == w.Ds {
+				if bd[string(k)] < 1 {
+					bk = append(bk, string(k))
+				}
+				bd[string(k)]++
+			}
+			if len(w.Ds) >= 8 && string(k)[:8] == w.Ds[0:8] {
+				if bd[string(k)] < 1 {
+					bk = append(bk, string(k))
+				}
+				bd[string(k)]++
+			}
+			if len(w.De) == 6 && string(k)[:6] == w.De {
+				if bd[string(k)] < 1 {
+					bk = append(bk, string(k))
+				}
+				bd[string(k)]++
+			}
+			if len(w.De) >= 8 && string(k)[:8] == w.De[0:8] {
+				if bd[string(k)] < 1 {
+					bk = append(bk, string(k))
+				}
+				bd[string(k)]++
+			}
+			if len(w.Ds) >= 8 && len(w.De) >= 8 && w.Ds[0:6] == w.De[0:6] && w.Ds[0:8] != w.De[0:8] {
+				ds, e := strconv.Atoi(w.Ds[6:8])
+				de, e := strconv.Atoi(w.De[6:8])
+				if ds < de && e == nil {
+					for i := ds; i <= de; i++ {
+						if bd[w.Ds[0:6]+dd(i)] < 1 {
+							bk = append(bk, w.Ds[0:6]+dd(i))
+						}
+						bd[w.Ds[0:6]+dd(i)]++
+					}
+				}
+				between = true
 			}
 			return nil
 		}); err != nil {
@@ -253,22 +295,20 @@ func Bucket(w xama.Redrec, db *bolt.DB) (bool, string) {
 		}
 		return nil
 	})
-	if len(w.Ds) >= 8 {
-		for i, j := range bn {
-			if j == w.Ds[0:8] {
-				return true, bn[i]
-			}
+	for _, vk := range bk {
+		if bn[vk] > 0 {
+			rc = append(rc, vk)
 		}
 	}
-	if len(w.De) >= 8 {
-		for i, j := range bn {
-			if j == w.De[0:8] {
-				return true, bn[i]
-			}
-		}
+	if len(rc) > 0 {
+		return between, rc
 	}
-	if len(bn) > 0 {
-		return true, bn[len(bn)-1]
+	return between, []string{bc[len(bc)-1]}
+}
+
+func dd(d int) string {
+	if d < 10 {
+		return "0" + strconv.Itoa(d)
 	}
-	return false, "0"
+	return strconv.Itoa(d)
 }
