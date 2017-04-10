@@ -127,10 +127,21 @@ func Call(w http.ResponseWriter, r *http.Request) {
 	if wt != st {
 		bd := xbdb.Opendb("./db/system.db", 0600)
 		defer bd.Close()
-		if fi, bn := xbdb.Bucket(wt, bd); fi {
-			db := xbdb.Opendb("./db/"+bn[0:6]+".db", 0600)
-			defer db.Close()
-			rec = xbdb.Find(bn, wt, db)
+		bw, bn := xbdb.Bucket(wt, bd)
+		db := xbdb.Opendb("./db/"+bn[0][0:6]+".db", 0600)
+		defer db.Close()
+		for _, nb := range bn {
+			wf := wt
+			if bw {
+				wf.Ds = ""
+				wf.De = ""
+			}
+			rc := xbdb.Find(nb, wf, db)
+			if len(rc) > 0 {
+				for _, rcc := range rc {
+					rec = append(rec, rcc)
+				}
+			}
 			Rc = len(rec)
 			Rt = strconv.FormatFloat(time.Now().Sub(t1).Seconds(), 'f', 1, 64)
 		}
