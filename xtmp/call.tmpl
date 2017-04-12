@@ -1,7 +1,7 @@
 {{define "call"}}
 <!DOCTYPE html>
 <html><head>
-    <title>Calls toolkit</title>
+    <title>Finder</title>
     <link rel="stylesheet" type="text/css" href="xcss/morf.css"/>
     <script type="text/javascript" src="xcss/call.js"></script>
     <meta charset="UTF-8">
@@ -26,7 +26,7 @@
       <col width="5%" class="bh">
       <thead>
       <tr>
-      <th>№</th>
+      <th>П.Н.</th>
       <th><input form="f0" id=ws type="text" name="sw" placeholder="Стан." value="{{.Old.Sw}}"/></th>
       <th><input form="f0" id=ih type="text" name="hi" placeholder="Стр." value="{{.Old.Hi}}"/></th>
       <th><input form="f0" id=cs type="text" name="sc" placeholder="Кат.А" value="{{.Old.Sc}}"/></th>
@@ -64,7 +64,7 @@
 </tbody>
 	</table></div>
   <div class="bott">
-    <img id="ldr" src="xcss/load.gif"/>
+    <img id="ldr" src="./xcss/load.gif"/>
   </div>
 	<script type="text/javascript">document.getElementById("cdate").innerHTML = cd(0);</script>
  </body></html>
