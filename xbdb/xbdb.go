@@ -179,10 +179,17 @@ func Comp(s, w xama.Redrec) bool {
 		df := ws.Field(i).String()
 		if df != "" {
 			fc += 1
-			if strings.Contains(sf, df) && wt.Field(i).Name != "Du" {
+			if strings.Contains(sf, df) && wt.Field(i).Name != "Du" && wt.Field(i).Name != "Sc" {
 				find = append(find, 0)
 			}
 			if wt.Field(i).Name == "Du" {
+				dd, _ := strconv.Atoi(df)
+				sd, _ := strconv.Atoi(sf)
+				if dd == sd {
+					find = append(find, 0)
+				}
+			}
+			if wt.Field(i).Name == "Sc" {
 				dd, _ := strconv.Atoi(df)
 				sd, _ := strconv.Atoi(sf)
 				if dd == sd {
