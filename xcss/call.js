@@ -52,7 +52,7 @@
       if ((e.which || e.keyCode) == 36) {
       window.location.href = '/';
     }
-    if ((e.which || e.keyCode) == 45) {
+    if (e.ctrlKey && e.keyCode == 8) {
     window.location.href = '/logs';
   }
     }
