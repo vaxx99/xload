@@ -49,12 +49,13 @@
       if ((e.which || e.keyCode) == 120) {
               window.close();
           }
-      if ((e.which || e.keyCode) == 36) {
+      if ((e.ctrlKey && e.keyCode) == 36) {
       window.location.href = '/';
     }
     if (e.ctrlKey && e.keyCode == 8) {
     window.location.href = '/logs';
   }
+
     }
 
     function subm(){

@@ -64,11 +64,12 @@ func Face(db *bolt.DB) Facs {
 	if e := db.View(func(tx *bolt.Tx) error {
 		b := tx.Bucket([]byte("size"))
 		dm := ""
+		dt := ""
 		mv := map[string]int{}
 		iv := map[string]int{}
 		if e := b.ForEach(func(k, v []byte) error {
 			_ = json.Unmarshal(v, &s)
-			dt := string(k)
+			dt = string(k)
 			if dt[:6] == time.Now().Add(-24*time.Hour).Format("200601") {
 				mv["nA"] = s.A
 				mv["nB"] = s.B
@@ -92,7 +93,7 @@ func Face(db *bolt.DB) Facs {
 		}); e != nil {
 			return e
 		}
-		f.DT = dm
+		f.DT = dt[6:8] + "." + dt[4:6] + "." + dt[:4]
 		f.TM = time.Now().Format("15:04:05")
 		f.AL = Base{iv["A"] + iv["B"] + iv["C"] + iv["D"], iv["A"], iv["B"], iv["C"], iv["D"]}
 		return nil

@@ -1,7 +1,10 @@
 package xbdb
 
 import (
+	"crypto/md5"
+	"encoding/hex"
 	"hash/fnv"
+	"io"
 	"log"
 	"os"
 	"reflect"
@@ -92,7 +95,20 @@ func Rset(recs xama.Block, db *bolt.DB) error {
 	return e
 }
 
-func Fget(key string, db *bolt.DB) bool {
+func Fhash(fn string) string {
+	f, err := os.Open(fn)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer f.Close()
+	h := md5.New()
+	if _, err := io.Copy(h, f); err != nil {
+		log.Fatal(err)
+	}
+	return hex.EncodeToString(h.Sum(nil))
+}
+
+func Fget(key, sum string, db *bolt.DB) bool {
 	var f bool
 	err := db.View(func(tx *bolt.Tx) error {
 		bucket := tx.Bucket([]byte("file"))
@@ -100,9 +116,8 @@ func Fget(key string, db *bolt.DB) bool {
 			f = false
 			return nil
 		}
-
 		val := bucket.Get([]byte(key))
-		if val != nil {
+		if string(val) == sum {
 			f = true
 		} else {
 			f = false

@@ -17,7 +17,7 @@ function cd(i){
 
 window.onkeypress = function(e) {
         if ((e.which || e.keyCode) == 13) {
-    	    window.history.go(-1);
+	    window.history.go(-1);
         }
         if ((e.which || e.keyCode) == 36) {
             window.location.href = '/';
